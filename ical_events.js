@@ -5,13 +5,15 @@ function ical_events(ical, event_callback, recur_event_callback) {
 }
 
 function jcal_events(jcal, event_callback, recur_event_callback) {
-    for (event of new ICAL.Component(jcal).getAllSubcomponents('vevent')) {
-        if (event.hasProperty('rrule')) {
-            recur_event_callback(event)
-        } else {
-            event_callback(event)
-        }
-    }
+    var vcalendar_comp = new ICAL.Component(jcal)
+    var vevents_comp = vcalendar_comp.getAllSubcomponents('vevent');
+    vevents_comp.forEach(function(vvent, i){
+      if( vvent.hasProperty('rrule') ){
+        recur_event_callback(vvent)
+      } else {
+        event_callback(vvent)
+      }
+    })
 }
 
 function event_duration(event) {
@@ -37,4 +39,3 @@ function expand_recur_event(event, dtstart, dtend, event_callback) {
         }
     }
 }
-

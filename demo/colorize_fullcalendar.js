@@ -11,11 +11,11 @@ function hash_color(string) {
 }
 
 function colorize_event(e) {
-    for (c of e.classList) {
-       if (c.startsWith('event-')) {
-           e.style['background'] = e.style['border-color'] = hash_color(c)
-       }
-    }     
+    e.classList.forEach(function(c, i){
+      if (c.startsWith('event-')) {
+          e.style['background'] = e.style['border-color'] = hash_color(c)
+      }
+    })
 }
 
 function colorize_events() {
@@ -26,5 +26,3 @@ function colorize_events() {
         } catch (TypeError) {}
     }
 }
-
-

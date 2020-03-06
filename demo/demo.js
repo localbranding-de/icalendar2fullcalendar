@@ -39,9 +39,8 @@ $(document).ready(function() {
         defaultDate: '2016-03-01'
     })
     sources_to_load_cnt = ics_sources.length
-    for (ics of ics_sources) {
-        load_ics(ics)
-    }
+    ics_sources.forEach(function(ics){
+      load_ics(ics)
+    })
     add_recur_events()
 })
-
